@@ -56,4 +56,4 @@ function baldrick_enqueue_libs(){
 
 
 // FOR EXAMPLE SCREEN
-include BALDRICK_PATH . 'example-admin-page.php';
+include BALDRICK_PATH . 'examples/example-admin-page.php';
