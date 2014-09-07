@@ -23,7 +23,7 @@
 	data-modal-width="100%"
 	data-modal-center="true"
 	data-modal-buttons="Close|dismiss"
-
+	data-request="#modal_content_example"
 >Modal Request (full)</button>
 
 <button class="button wp-ajax" type="button" 
@@ -84,7 +84,8 @@
 	data-modal-height="500px"
 	data-modal-center="true"
 	data-modal-buttons="Close|dismiss"
-
+	data-request="#modal_content_example"
+	
 >Modal Request (500x500 centered)</button>
 	
 </script>

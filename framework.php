@@ -1,19 +1,14 @@
 <?php
-/*
-Plugin Name: WP Baldrick Boilerplate
-Description: Boilerplate for baldrick based UI development
-Author: David Cramer
-Version: 1.0.0
-*/
-
 
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
-// Define constants to be used within
+// Define constants to be used within - ( change paths if theme )
 define( 'BALDRICK_PATH'		, plugin_dir_path( __FILE__ ) );
 define( 'BALDRICK_URL'		, plugin_dir_url( __FILE__ ) );
 define( 'BALDRICK_VER'		, '1.0.0');
+
+
 // comma separated list of screens to include the framework on
 // see http://codex.wordpress.org/Class_Reference/WP_Screen for more.
 define( 'BALDRICK_SCREENS'	, 'post,edit' );
@@ -53,7 +48,3 @@ function baldrick_enqueue_libs(){
 	// Enqueue the style for the modals.
 	wp_enqueue_style( 'baldrick-modals' );
 }
-
-
-// FOR EXAMPLE SCREEN
-include BALDRICK_PATH . 'examples/example-admin-page.php';

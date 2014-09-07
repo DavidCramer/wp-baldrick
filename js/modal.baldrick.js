@@ -85,13 +85,13 @@
 			}
 		},
 		event : function(el, obj){
-			var trigger = $(el), modal_id = 'wm';
-			$('.baldrick-modal-wrap').css('zIndex' , '100099');
+			var trigger = $(el), modal_id = 'wm';			
 			if(trigger.data('modal') && wm_hasModal === false){
 				if(trigger.data('modal') !== 'true'){
 					modal_id = trigger.data('modal');
 				}
 				if(!$('#' + modal_id + '_baldrickModal').length){
+					$('.baldrick-modal-wrap').css('zIndex' , '100099');
 					//wm_hasModal = true;
 					// write out a template wrapper.
 					var modal = $('<form>', {
@@ -141,6 +141,10 @@
 					modalBackdrop.on('click', modal_closer );
 					modalCloser.on('click', modal_closer );
 					$(window).on('keypress', modal_closer )
+					
+					modal.on('keyup', 'select,input,checkbox,radio,textarea', function(){
+						$(window).off('keypress', modal_closer );
+					})
 
 					modalContent.appendTo(modal);
 					modalFooter.appendTo(modal);
