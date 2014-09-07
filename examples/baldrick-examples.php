@@ -69,6 +69,19 @@
 
 >Modal Request (Template)</button>
 
+<button class="button wp-ajax" type="button" 
+	
+	data-request="#text-area-src"
+	data-template="#modal_content_table_example"
+	data-modal="example-modal"
+	data-modal-title="Baldrick Modal Example"
+	data-modal-width="500px"
+	data-modal-height="500px"
+	data-modal-center="true"
+	data-modal-buttons="Close|dismiss;Save|alert|button-primary"
+
+>Modal Request (Template)</button>
+<textarea id="text-area-src">[{"key":"modal","value":"example-modal"},{"key":"modalTitle","value":"Baldrick Modal Example"},{"key":"modalButtons","value":"Close|dismiss;Save|alert|button-primary"},{"key":"modalWidth","value":"500px"},{"key":"modalHeight","value":"500px"},{"key":"action","value":"baldrick_examples"},{"key":"template","value":"#modal_content_table_example"},{"key":"modalCenter","value":"true"}]</textarea>
 <script type="text/html" id="modal_content_example">
 <button class="button wp-ajax" type="button" 
 	
