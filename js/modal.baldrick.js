@@ -165,6 +165,9 @@
 				modal 			= $('#' + modal_id + '_baldrickModal');
 				modalBody 	= $('#' + modal_id + '_baldrickModalBody');
 				modalTitle 	= $('#' + modal_id + '_baldrickModalTitle');
+				modalButtons= $('#' + modal_id + '_baldrickModalFooter button');
+				modalButtons.prop('disabled', false);
+
 				if(obj.params.trigger.data('loadClass')){
 					loadClass = obj.params.trigger.data('loadClass');
 				}
@@ -267,6 +270,8 @@
 									$('#' + modal_id + '_baldrickModalCloser').trigger('click');
 								})
 							}
+							button.prop('disabled', true);
+							
 							footer.append(button.html(buttonLabel));
 							if(b<buttons.length){
 								footer.append('&nbsp;');

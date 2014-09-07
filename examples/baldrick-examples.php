@@ -46,7 +46,7 @@
 
 <button class="button wp-ajax" type="button" 
 	
-	data-action="baldrick_examples_nope"
+	data-action="baldrick_examples"
 	data-modal="example-modal"
 	data-modal-width="160px"
 	data-modal-height="100px"
@@ -65,7 +65,7 @@
 	data-modal-width="500px"
 	data-modal-height="500px"
 	data-modal-center="true"
-	data-modal-buttons="Close|dismiss"
+	data-modal-buttons="Close|dismiss;Save|alert|button-primary"
 
 >Modal Request (Template)</button>
 

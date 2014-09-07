@@ -1,7 +1,6 @@
 /* custom helpers */
   Handlebars.registerHelper("even", function(options) {
   	var intval = options.data.index / 2;
-  	console.log(arguments);
   	if( intval === Math.ceil( intval ) ){
   		return options.fn(this);
   	}else{

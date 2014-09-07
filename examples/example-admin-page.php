@@ -26,5 +26,11 @@ function baldrick_examples_function(){
 		);
 	}
 
-	wp_send_json( $data );
+	if(isset($_POST['template'])){
+		wp_send_json( $data );
+	}
+	echo '<pre>';
+	print_r($_POST);
+	echo '</pre>';
+	die;
 }
