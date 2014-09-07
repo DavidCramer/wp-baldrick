@@ -16,5 +16,15 @@ function baldrick_build_example_page(){
 add_action( 'wp_ajax_baldrick_examples', 'baldrick_examples_function' );
 // add example ajax function
 function baldrick_examples_function(){
-	dump($_POST);
+	
+	$data = array();
+
+	foreach($_POST as $key=>$value){
+		$data[] = array(
+			'key'	=>	$key,
+			'value'	=>	$value
+		);
+	}
+
+	wp_send_json( $data );
 }

@@ -3,7 +3,6 @@
 <button class="button wp-ajax" type="button" 
 	
 	data-action="baldrick_examples"
-	data-target="#baldrick-example-target"
 	data-modal="example-modal"
 	data-modal-title="Baldrick Modal Example"
 	data-modal-width="500px"
@@ -17,7 +16,6 @@
 <button class="button wp-ajax" type="button" 
 	
 	data-action="baldrick_examples"
-	data-target="#baldrick-example-target"
 	data-modal="example-modal"
 	data-modal-title="Baldrick Modal Example"
 	data-modal-width="100%"
@@ -29,7 +27,6 @@
 <button class="button wp-ajax" type="button" 
 	
 	data-action="baldrick_examples"
-	data-target="#baldrick-example-target"
 	data-modal="example-modal"
 	data-modal-width="100%"
 	data-modal-center="true"
@@ -41,7 +38,6 @@
 <button class="button wp-ajax" type="button" 
 	
 	data-action="baldrick_examples"
-	data-target="#baldrick-example-target"
 	data-modal="example-modal"
 	data-modal-width="100%"
 	data-modal-center="true"
@@ -51,7 +47,6 @@
 <button class="button wp-ajax" type="button" 
 	
 	data-action="baldrick_examples_nope"
-	data-target="#baldrick-example-target"
 	data-modal="example-modal"
 	data-modal-width="160px"
 	data-modal-height="100px"
@@ -63,21 +58,21 @@
 
 <button class="button wp-ajax" type="button" 
 	
-	data-request="#modal_content_example"
-	data-target="#baldrick-example-target"
+	data-action="baldrick_examples"
+	data-template="#modal_content_table_example"
 	data-modal="example-modal"
-	
-	data-modal-height="50px"
-	sdata-modal-life="1000"
-	data-modal-class="updated"
->Modal Request centered no title life span 1000ms</button>
+	data-modal-title="Baldrick Modal Example"
+	data-modal-width="500px"
+	data-modal-height="500px"
+	data-modal-center="true"
+	data-modal-buttons="Close|dismiss"
 
-<div id="baldrick-example-target"></div>
+>Modal Request (Template)</button>
+
 <script type="text/html" id="modal_content_example">
 <button class="button wp-ajax" type="button" 
 	
 	data-action="baldrick_examples"
-	data-target="#baldrick-example-target"
 	data-modal="example-modal-inner"
 	data-modal-title="Baldrick Modal Example"
 	data-modal-width="500px"
@@ -85,8 +80,24 @@
 	data-modal-center="true"
 	data-modal-buttons="Close|dismiss"
 	data-request="#modal_content_example"
-	
+
 >Modal Request (500x500 centered)</button>
 	
+</script>
+
+
+<script type="text/html" id="modal_content_table_example">
+<table class="widefat">
+	<tr>
+		<th>Key</th>
+		<th>Value</th>
+	</tr>
+	{{#each this}}
+	<tr class="{{#even}}alternate{{/even}}">
+		<td>{{key}}</td>
+		<td>{{value}}</td>
+	</tr>
+	{{/each}}
+</table>	
 </script>
 

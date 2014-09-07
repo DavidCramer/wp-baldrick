@@ -1,10 +1,21 @@
 /* custom helpers */
-  Handlebars.registerHelper("is_single", function(value, options) {
-    if(Object.keys(value).length !== 1){
-      return false;
-    }else{
-      return options.fn(this);
-    }
+  Handlebars.registerHelper("even", function(options) {
+  	var intval = options.data.index / 2;
+  	console.log(arguments);
+  	if( intval === Math.ceil( intval ) ){
+  		return options.fn(this);
+  	}else{
+  		return false;
+  	}
+  	
+  });
+  Handlebars.registerHelper("odd", function(options) {
+  	var intval = options.data.index / 2;
+  	if( intval === Math.ceil( intval ) ){
+  		return false;
+  	}else{
+  		return options.fn(this);
+  	}
   });
   Handlebars.registerHelper("script", function(options) {
     if(options.hash.src){
