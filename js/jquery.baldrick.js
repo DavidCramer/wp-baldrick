@@ -204,8 +204,12 @@
 					try{
 						if( $(params.url).length ){
 							
-							var dt = $(params.url).is('input,select,radio,checkbox,file') ? $(params.url).val() : $(params.url).html();
-
+							var dt = $(params.url).is('input,select,radio,checkbox,file,textarea') ? $(params.url).val() : $(params.url).html();
+							if(params.dataType === 'json'){
+								try{
+									dt = JSON.parse(dt);
+								}catch (e){}
+							}
 							dt = do_helper('filter', {data:dt, rawData: dt, params: params});
 							do_helper('target', dt);
 							do_helper('refresh', {params:params});
@@ -214,9 +218,7 @@
 							return this;					
 
 						}
-					} catch (e) {
-						// nope!
-					}
+					}catch (e){}
 				}
 				switch (typeof params.url){
 					case 'function' : return params.url(this, e);

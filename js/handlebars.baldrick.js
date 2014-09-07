@@ -117,6 +117,12 @@
 			}
 
 		},
+		params	: function(params){
+			if((params.trigger.data('templateUrl') || params.trigger.data('template')) && typeof Handlebars === 'object'){
+				params.dataType = 'json';
+				return params;
+			}
+		},
 		request			: function(obj, defaults){
 			if(obj.params.trigger.data('templateUrl')){
 				if( typeof compiledTemplates[obj.params.trigger.data('templateUrl')] === 'boolean' ){
@@ -128,12 +134,6 @@
 				}
 			}
 			return obj;
-		},
-		request_params	: function(request, defaults, params){
-			if((params.trigger.data('templateUrl') || params.trigger.data('template')) && typeof Handlebars === 'object'){
-				request.dataType = 'json';
-				return request;
-			}
 		},
 		filter			: function(opts, defaults){			
 			

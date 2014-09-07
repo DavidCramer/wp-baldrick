@@ -260,7 +260,7 @@
 							var options   = buttons[b].split('|'),
 								buttonLabel = options[0],
 								callback  = options[1].trim(),
-								atts    = $.extend({}, {"class":'button ' + defaults.triggerClass.substr(1)}, ( callback.substr(0,1) === '{' ? jQuery.parseJSON(callback) : {"data-callback" : callback} ) ),
+								atts    = $.extend({}, {"type": "button", "class":'button '}, ( callback.substr(0,1) === '{' ? jQuery.parseJSON(callback) : {"data-callback" : callback} ) ),
 								button    = $('<button>', atts);
 							if(options[2]){
 								button.addClass(options[2]);
@@ -269,6 +269,8 @@
 								button.on('click', function(){
 									$('#' + modal_id + '_baldrickModalCloser').trigger('click');
 								})
+							}else{
+								button.addClass(defaults.triggerClass.substr(1));
 							}
 							button.prop('disabled', true);
 							
