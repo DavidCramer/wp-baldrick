@@ -2,7 +2,7 @@
 <hr>
 <button class="button wp-ajax" type="button" 
 	
-	data-action="baldrick_examples"
+	data-request="#modal_content_form"
 	data-modal="example-modal"
 	data-modal-title="Baldrick Modal Example"
 	data-modal-width="500px"

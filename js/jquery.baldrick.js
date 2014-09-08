@@ -14,7 +14,13 @@
 		},
 		target			: function(opts){
 			if(opts.params.target){
-				opts.params.target[opts.params.targetInsert](opts.data);
+				
+				
+				if(opts.params.target.is('textarea,input') && typeof opts.data === 'object'){
+					opts.params.target.val( JSON.stringify(opts.data) ).trigger('change');
+				}else{
+					opts.params.target[opts.params.targetInsert](opts.data);
+				}
 				if(typeof opts.params.callback === 'string'){
 					if(typeof window[opts.params.callback] === 'function'){
 						return window[opts.params.callback](opts);
@@ -108,6 +114,54 @@
 			}
 			return input;
 		},
+		serialize_form	=	function(form){
+
+			var config			= {},
+				data_fields		= form.find('input,radio,checkbox,select,textarea,file'),
+				objects			= [],
+				arraynames		= {};
+
+			// no fields - exit			
+			if(!data_fields.length){
+				return;
+			}
+
+			for( var v = 0; v < data_fields.length; v++){
+				if( data_fields[v].getAttribute('name') === null){
+					continue;
+				}
+				var field 		= $(data_fields[v]),
+					basename 	= field.prop('name').replace(/\[/gi,':').replace(/\]/gi,''),//.split('[' + id + ']')[1].substr(1),
+					name		= basename.split(':'),
+					value 		= ( field.is(':checkbox,:radio') ? field.filter(':checked').val() : field.val() ),
+					lineconf 	= {};					
+
+				for(var i = name.length-1; i >= 0; i--){
+					var nestname = name[i];
+					if(nestname.length === 0){
+						if( typeof arraynames[name[i-1]] === 'undefined'){
+							arraynames[name[i-1]] = 0;
+						}else{
+							arraynames[name[i-1]] += 1;
+						}
+						nestname = arraynames[name[i-1]];
+					}
+					if(i === name.length-1){
+						lineconf[nestname] = value;
+					}else{
+						var newobj = lineconf;
+						lineconf = {};
+						lineconf[nestname] = newobj;
+					}		
+				}
+				
+				$.extend(true, config, lineconf);
+			};
+			// give json object to trigger
+			//params.data = JSON.stringify(config);
+			//params.data = config;
+			return config;
+		},
 		triggerClass	= this.selector,
 		inst			= this.not('._tisBound');
 
@@ -188,7 +242,7 @@
 
 				params = do_helper('params', params);
 				if(params === false){return false;}
-				
+
 				// check if request is a function
 				e.preventDefault();
 				if(typeof window[params.url] === 'function'){
@@ -204,12 +258,13 @@
 					try{
 						if( $(params.url).length ){
 							
-							var dt = $(params.url).is('input,select,radio,checkbox,file,textarea') ? $(params.url).val() : $(params.url).html();
+							var dt = $(params.url).is('input,select,radio,checkbox,file,textarea') ? $(params.url).val() : ( $(params.url).is('form') ? serialize_form( $(params.url) ) : $(params.url).html() );
 							if(params.dataType === 'json'){
 								try{
 									dt = JSON.parse(dt);
 								}catch (e){}
 							}
+
 							dt = do_helper('filter', {data:dt, rawData: dt, params: params});
 							do_helper('target', dt);
 							do_helper('refresh', {params:params});
@@ -274,8 +329,12 @@
 						tr.data('_value', tr.val());
 					}
 					// make field vars
-					for(var att in tr.data()){
-						data.append(att, tr.data(att));
+					for(var att in params.trigger.data()){
+						data.append(att, params.trigger.data(att));
+					}
+					// convert param.data to json
+					if(params.data){
+						data.append('data', JSON.stringify(params.data));
 					}
 					// use input
 					if(tr.is('input,select,textarea')){
@@ -299,7 +358,7 @@
 					}
 				}else{
 					
-					var sd = tr.serializeArray(), atts = tr.data(), param = [];
+					var sd = tr.serializeArray(), atts = params.trigger.data(), param = [];
 					// insert user set params
 					if(defaults.data){
 						atts = $.extend(defaults.data, atts);
@@ -312,6 +371,10 @@
 							param.push(v);
 						});
 					}
+					// convert param.data to json
+					if(params.data){
+						param.push({name: 'data', value: JSON.stringify(params.data)});
+					}					
 					data = $.param(param);
 				}
 

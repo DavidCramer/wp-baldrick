@@ -14,6 +14,7 @@ function baldrick_build_example_page(){
 
 // add example ajax actions
 add_action( 'wp_ajax_baldrick_examples', 'baldrick_examples_function' );
+add_action( 'wp_ajax_baldrick_examples_json', 'baldrick_examples_json' );
 // add example ajax function
 function baldrick_examples_function(){
 	
@@ -33,4 +34,8 @@ function baldrick_examples_function(){
 	print_r($_POST);
 	echo '</pre>';
 	die;
+}
+
+function baldrick_examples_json(){
+	wp_send_json( $_SERVER );
 }

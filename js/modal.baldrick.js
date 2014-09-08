@@ -265,6 +265,11 @@
 							if(options[2]){
 								button.addClass(options[2]);
 							}
+							if(atts['data-modal-close']){
+								button.data('callback', function(){
+									$('#' + modal_id + '_baldrickModalCloser').trigger('click');
+								});
+							}
 							if(callback === 'dismiss'){
 								button.on('click', function(){
 									$('#' + modal_id + '_baldrickModalCloser').trigger('click');
