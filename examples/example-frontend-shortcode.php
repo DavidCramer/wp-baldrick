@@ -30,24 +30,31 @@ function wp_baldrick_shortcode(){
 
 	<!-- RESULTS TEMPLATE -->
 	<script type="text/html" id="my_result_template">
-		{{#each items}}
-		<div>		
-			<h1 class="entry-title"><a href="{{link}}">{{title}}</a></h1>
-			<div><img src="{{author/avatar}}" class="avatar avatar-24" style="width: 18px; display: inline; vertical-align: middle;"> By: {{author/name}}</div>
-			{{#if excerpt}}
-			<p>{{{excerpt}}}</p>
-			{{/if}}
-		</div>
-		{{else}}
-		<hr>
-		<p>No results found for <strong>"{{request/filter/s}}"</strong></p>
-		{{/each}}
+
+		<hr> 
+
 		{{#if items}}
 
-		{{headers/total}} results. | Page{{#if request/offset}} {{request/offset}} {{else}} 1 {{/if}} of {{headers/total_pages}}.
+			{{headers/total}} results. | Page{{#if request/offset}} {{request/offset}} {{else}} 1 {{/if}} of {{headers/total_pages}}.
 
+			{{#each items}}
+				
+				<div>		
+					<h1 class="entry-title"><a href="{{link}}">{{title}}</a></h1>
+					<div><img src="{{author/avatar}}" class="avatar avatar-24" style="width: 18px; display: inline; vertical-align: middle;"> By: {{author/name}}</div>
+					{{#if excerpt}}
+					<p>{{{excerpt}}}</p>
+					{{/if}}
+				</div>
+
+			{{/each}}
+		{{else}}
+			
+			<p>No results found for <strong>"{{request/filter/s}}"</strong></p>
+		
 		{{/if}}
-		<hr>
+
+
 	</script>
 
 
