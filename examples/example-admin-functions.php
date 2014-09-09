@@ -7,7 +7,7 @@ function baldrick_example_admin_page(){
 
 // build the example page by including the example page
 function baldrick_build_example_page(){
-	include plugin_dir_path( __FILE__ ) . 'baldrick-examples.php';
+	include plugin_dir_path( __FILE__ ) . 'example-admin-page.php';
 }
 
 
