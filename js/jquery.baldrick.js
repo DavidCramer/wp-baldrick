@@ -10,13 +10,15 @@
 		event			: function(el,e){
 			return el;
 		},
+		pre_filter			: function(opts){
+			return opts.data;
+		},
 		filter			: function(opts){
 			return opts;
 		},
 		target			: function(opts){
 			if(opts.params.target){
-				
-				
+
 				if(opts.params.target.is('textarea,input') && typeof opts.data === 'object'){
 					opts.params.target.val( JSON.stringify(opts.data) ).trigger('change');
 				}else{
@@ -30,6 +32,9 @@
 					return opts.params.callback(opts);
 				}
 			}
+		},
+		request_data : function(obj){
+			return obj.data;
 		},
 		request			: function(opts){
 
@@ -261,6 +266,7 @@
 				if(typeof window[params.url] === 'function'){
 					
 					var dt = window[params.url](params, ev);
+					dt = do_helper('pre_filter', {data:dt, params: params});
 					dt = do_helper('filter', {data:dt, rawData: dt, params: params});
 					do_helper('target', dt);
 					do_helper('refresh', {params:params});
@@ -278,6 +284,7 @@
 								}catch (e){}
 							}
 
+							dt = do_helper('pre_filter', {data:dt, params: params});
 							dt = do_helper('filter', {data:dt, rawData: dt, params: params});
 							do_helper('target', dt);
 							do_helper('refresh', {params:params});
@@ -373,28 +380,32 @@
 					
 					var sd = tr.serializeArray(), atts = params.trigger.data(), param = [];
 					// insert user set params
-					if(defaults.data){
-						atts = $.extend(defaults.data, atts);
+					if( !tr.attr('data-send-params') || tr.data('sendParams') === true){
+						if(defaults.data){
+							atts = $.extend(defaults.data, atts);
+						}
+						$.each( atts, function(k,v) {
+							param.push({name: k, value: v});
+						});
 					}
-					$.each( atts, function(k,v) {
-						param.push({name: k, value: v});
-					});
+
 					if(sd.length){
 						$.each( sd, function(k,v) {
 							param.push(v);
 						});
+						params.requestData = serialize_form(tr);
 					}
 					// convert param.data to json
 					if(params.data){
 						param.push({name: 'data', value: JSON.stringify(params.data)});
 					}					
 					data = $.param(param);
+					params.requestData = $.extend(tr.data(), params.requestData);
 				}
-
 				
 				var request = {
 						url		: params.url,
-						data	: data,
+						data	: do_helper('request_data', {data:data, params: params }),
 						cache	: params.cache,
 						timeout	: params.timeout,
 						type	: params.method,
@@ -455,7 +466,7 @@
 								$(window).trigger('baldrick.cache', key);
 							}
 
-
+							dt = do_helper('pre_filter', {data:dt, request: request, params: params, xhr: xhr});
 							dt = do_helper('filter', {data:dt, rawData: rawdata, request: request, params: params, xhr: xhr});
 							do_helper('target', dt);
 						},
@@ -497,8 +508,10 @@
 					var dt		= request_result.data,
 						rawdata = dt;
 
-					do_helper('target'			,
-						do_helper('filter'			, {data:dt, rawData: rawdata, request: request, params: params})
+					do_helper('target'				,
+							do_helper('filter'		,
+							do_helper('pre_filter'	, {data:dt, request: request, params: params})
+						)
 					);
 					do_helper('request_complete', {jqxhr:false, textStatus:true, request:request, params:params});
 					do_helper('refresh'			, {jqxhr:false, textStatus:true, request:request, params:params});

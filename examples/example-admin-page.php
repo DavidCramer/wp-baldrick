@@ -1,39 +1,38 @@
 <?php
 
 add_shortcode( 'wp_baldrick_example', 'wp_baldrick_shortcode' );
-function wp_baldrick_shortcode($atts){
-	if( empty( $atts['endpoint'] ) ){
-		return;
-	}
+function wp_baldrick_shortcode(){
 	ob_start();
 ?>
 <form
  id="my_search_form"
  class="wp-baldrick" 
- data-request="<?php echo json_url( $atts['endpoint'] ); ?>"
+ data-endpoint="posts"
  data-target="#search_results"
  data-template="#my_result_template"
  data-event="submit"
  data-method="GET"
+ data-send-params="false"
 >
-   <input type="text" class="wp-baldrick" name="s" data-event="keyup" data-for="#my_search_form">
+   <input type="text" class="wp-baldrick" name="filter[s]" data-event="keyup" data-for="#my_search_form">
    <input type="text" name="filter[posts_per_page]" value="5">
    <button type="submit">Search</button>
+   <div id="search_results"></div>
 </form>
-<div id="search_results"></div>
 <script type="text/html" id="my_result_template">
-{{#each this}}
-{{if message}}
-<p>{{message}}</p>
+{{#each items}}	
+		<div>
+			<li class="topcoat-list__item">
+				<h3>{{title}}</h3>
+				{{{excerpt}}}
+			</li>
+		</div>
+	<br>
 {{else}}
-<article>
-  <li class="topcoat-list__item">
-    <h3>{{title}}</h3>
-    <p>{{excerpt</p>
-  </li>
- </article>
- {{/if}}
+<hr>
+<p>No results found for <strong>"{{request/filter/s}}"</strong></p>
 {{/each}}
+<hr>
 </script>
 <?php 
 	return ob_get_clean();
