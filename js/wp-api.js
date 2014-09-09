@@ -15,7 +15,8 @@ var wp_api_endpoint = {};
 			});
 		},
 		request_data	: function(obj){
-			if(obj.params.trigger.data('endpoint')){
+			if(obj.params.trigger.data('endpoint') && wp_api_endpoint[obj.params.trigger.data('endpoint')] ){
+				
 				// update data filters
 				var data = {};
 
@@ -37,7 +38,7 @@ var wp_api_endpoint = {};
 		},
 		pre_filter	: function(obj, defaults){
 			
-			if(obj.params.dataType === 'json'){
+			if(obj.params.dataType === 'json' && obj.params.trigger.data('endpoint') && wp_api_endpoint[obj.params.trigger.data('endpoint')] ){
 
 				var new_object 		= {
 					request			:	obj.params.requestData,
