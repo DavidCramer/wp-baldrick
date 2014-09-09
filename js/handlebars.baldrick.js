@@ -135,7 +135,7 @@
 			return obj;
 		},
 		filter			: function(opts, defaults){
-			console.log(opts.data);
+
 			if(opts.params.trigger.data('templateUrl')){
 				if( typeof compiledTemplates[opts.params.trigger.data('templateUrl')] === 'function' ){
 					opts.data = compiledTemplates[opts.params.trigger.data('templateUrl')](opts.data);

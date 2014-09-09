@@ -218,7 +218,7 @@
 						datamerge	= $.extend({}, fort.data(), tr.data());
 						delete datamerge['for'];
 					fort.data(datamerge);
-					if( fort.is('form') ){
+					if( fort.is('form') ){						
 						fort.submit();
 						return this;
 					}else{
@@ -379,14 +379,10 @@
 				}else{
 					
 					var sd = tr.serializeArray(), atts = params.trigger.data(), param = [];
+					//console.log(atts);
 					// insert user set params
-					if( !tr.attr('data-send-params') || tr.data('sendParams') === true){
-						if(defaults.data){
-							atts = $.extend(defaults.data, atts);
-						}
-						$.each( atts, function(k,v) {
-							param.push({name: k, value: v});
-						});
+					if(defaults.data){
+						atts = $.extend(defaults.data, atts);
 					}
 
 					if(sd.length){
@@ -397,9 +393,9 @@
 					}
 					// convert param.data to json
 					if(params.data){
-						param.push({name: 'data', value: JSON.stringify(params.data)});
+						atts = $.extend(atts, params.data);
 					}					
-					data = $.param(param);
+					data = atts;
 					params.requestData = $.extend(tr.data(), params.requestData);
 				}
 				

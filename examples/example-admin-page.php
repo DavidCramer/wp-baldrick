@@ -5,7 +5,7 @@ function wp_baldrick_shortcode(){
 	ob_start();
 ?>
 <form
- id="my_search_form"
+ id="post_search_example"
  class="wp-baldrick" 
  data-endpoint="posts"
  data-target="#search_results"
@@ -14,20 +14,22 @@ function wp_baldrick_shortcode(){
  data-method="GET"
  data-send-params="false"
 >
-   <input type="text" class="wp-baldrick" name="filter[s]" data-event="keyup" data-for="#my_search_form">
-   <input type="text" name="filter[posts_per_page]" value="5">
+   <input type="text" class="wp-baldrick" name="filter[s]" data-event="keyup" data-for="#post_search_example" autocomplete="off">
+   <input type="text" name="filter[posts_per_page]" autocomplete="off" value="5">
+   
    <button type="submit">Search</button>
    <div id="search_results"></div>
 </form>
 <script type="text/html" id="my_result_template">
 {{#each items}}	
-		<div>
-			<li class="topcoat-list__item">
-				<h3>{{title}}</h3>
-				{{{excerpt}}}
-			</li>
-		</div>
-	<br>
+	<div>
+		<a href="{{link}}"><h3>{{title}}</h3></a>
+		{{#if excerpt}}
+		{{{excerpt}}}
+		{{else}}
+		no content
+		{{/if}}
+	</div>
 {{else}}
 <hr>
 <p>No results found for <strong>"{{request/filter/s}}"</strong></p>
