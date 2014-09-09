@@ -244,7 +244,7 @@
 					method : (tr.data('method')			? tr.data('method')				: (tr.attr('method')		? tr.attr('method') :(defaults.method ? defaults.method : 'GET'))),
 					dataType : (tr.data('type')			? tr.data('type')				: (defaults.dataType		? defaults.dataType : false)),
 					timeout : (tr.data('timeout')		? tr.data('timeout')			: 30000),
-					target : (tr.data('target')			? ( tr.data('target') === '_parent' ? tr.parent() : $(tr.data('target')) )			: (defaults.target			? $(defaults.target) : $('<html>'))),
+					target : (tr.data('target')			? ( tr.data('target') === '_parent' ? tr.parent() : ( tr.data('target') === '_self' ? $(tr) : $(tr.data('target')) ) )			: (defaults.target			? $(defaults.target) : $('<html>'))),
 					targetInsert : (tr.data('targetInsert')	? (tr.data('targetInsert') === 'replace' ? 'replaceWith' : tr.data('targetInsert'))	: (defaults.targetInsert ? (defaults.targetInsert === 'replace' ? 'replaceWith': defaults.targetInsert) : 'html')),
 					loadClass : (tr.data('loadClass')		? tr.data('loadClass')			: (defaults.loadClass		? defaults.loadClass : 'loading')),
 					activeClass : (tr.data('activeClass')	? tr.data('activeClass')		: (defaults.activeClass		? defaults.activeClass : 'active')),

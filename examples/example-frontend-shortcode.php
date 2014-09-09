@@ -4,8 +4,9 @@ add_shortcode( 'wp_baldrick_example', 'wp_baldrick_shortcode' );
 function wp_baldrick_shortcode(){
 
 	ob_start();
+	
 	?>
-	<!-- SEARCH FORM -->
+	<!-- SEARCH FORM : ATTRIBUTES DEFINE THE AJAX REQUEST -->
 	<form id="post_search_example" method="GET" class="wp-baldrick" data-endpoint="posts" data-target="#search_results" data-template="#my_result_template">
 		
 		<!-- SEARCH FIELD -->

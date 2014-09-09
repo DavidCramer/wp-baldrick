@@ -1,8 +1,14 @@
 <?php
 
-if ( ! defined( 'WPINC' ) ) {
+if ( ! defined( 'WPINC' )  ) {
 	die;
 }
+
+// only include once
+if ( defined( 'BALDRICK_VER' )  ) {
+	return;
+}
+
 // Define constants to be used within - ( change paths if theme )
 define( 'BALDRICK_PATH'		, plugin_dir_path( __FILE__ ) );
 define( 'BALDRICK_URL'		, plugin_dir_url( __FILE__ ) );
