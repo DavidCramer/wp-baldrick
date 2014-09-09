@@ -1,7 +1,7 @@
 jQuery(document).ready(function($){
 	
 	// initialise baldrick triggers
-	$('.baldrick').baldrick({
+	$('.wp-baldrick').baldrick({
 		request			:	ajaxurl,
 		method			:	'POST'
 	});

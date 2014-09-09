@@ -213,7 +213,12 @@
 						datamerge	= $.extend({}, fort.data(), tr.data());
 						delete datamerge['for'];
 					fort.data(datamerge);
-					return fort.trigger((fort.data('event') ? fort.data('event') : ev));
+					if( fort.is('form') ){
+						fort.submit();
+						return this;
+					}else{
+						return fort.trigger((fort.data('event') ? fort.data('event') : ev));
+					}
 				}
 				if(tr.is('form') && !tr.data('request') && tr.attr('action')){
 					tr.data('request', tr.attr('action'));

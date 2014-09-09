@@ -1,5 +1,34 @@
 <?php
 
+add_shortcode( 'wp_baldrick_example', 'wp_baldrick_shortcode' );
+function wp_baldrick_shortcode(){
+?>
+<form
+ id="my_search_form"
+ class="wp-baldrick" 
+ data-request="http://local.wordpress.dev/wp-json/posts"
+ data-target="#search_results"
+ data-template="#my_result_template"
+ data-event="submit"
+ method="GET"
+>
+   <input type="text" class="wp-baldrick" name="s" data-event="keyup" data-for="#my_search_form">
+   <input type="text" name="filter[posts_per_page]" value="5">
+   <button type="submit">Search</button>
+</form>
+<div id="search_results"></div>
+<script type="text/html" id="my_result_template">
+{{#each this}}
+<article>
+  <li class="topcoat-list__item">
+    <h3>{{title}}</h3>
+    <p>{{excerpt</p>
+  </li>
+{{/each}}
+</script>
+<?php 
+}
+
 // Add Admin menu page
 add_action( 'admin_menu', 'baldrick_example_admin_page' );
 function baldrick_example_admin_page(){
