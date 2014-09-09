@@ -1,8 +1,9 @@
 /* -- BaldrickJS  V2.2 | (C) David Cramer - 2013 | MIT License */
 (function($){
 
-	var baldrickCache = {},
-		baldrickhelpers = {
+	var baldrickCache 		= {},
+		baldrickRequests 	= {},
+		baldrickhelpers 	= {
 		_plugins		: {},
 		load			: {},
 		bind			: {},
@@ -72,11 +73,18 @@
 				}
 
 			}
-			return $.ajax(opts.request);
+			if( baldrickRequests[opts.params.trigger.prop('id')] ){
+				baldrickRequests[opts.params.trigger.prop('id')].abort();
+			}
+			baldrickRequests[opts.params.trigger.prop('id')] = $.ajax(opts.request);
+			return baldrickRequests[opts.params.trigger.prop('id')];
 		},
 		request_complete: function(opts){
 			opts.params.complete(opts);
 			opts.params.loadElement.removeClass(opts.params.loadClass);
+			if( baldrickRequests[opts.params.trigger.prop('id')] ){
+				delete baldrickRequests[opts.params.trigger.prop('id')];
+			}
 		},
 		request_error	: function(opts){
 			opts.params.error(opts);

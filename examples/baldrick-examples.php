@@ -1,6 +1,6 @@
 <h3>WP Baldrick Examples</h3>
 <hr>
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-request="#modal_content_form"
 	data-modal="example-modal"
@@ -13,7 +13,7 @@
 >Modal Request (500x500 centered)</button>
 
 
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-action="baldrick_examples"
 	data-modal="example-modal"
@@ -24,7 +24,7 @@
 	data-request="#modal_content_example"
 >Modal Request (full)</button>
 
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-action="baldrick_examples"
 	data-modal="example-modal"
@@ -35,7 +35,7 @@
 >Modal Request (no title)</button>
 
 
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-action="baldrick_examples"
 	data-modal="example-modal"
@@ -44,7 +44,7 @@
 
 >Modal Request (no buttons)</button>
 
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-action="baldrick_examples"
 	data-modal="example-modal"
@@ -56,7 +56,7 @@
 
 >Modal Request centered no title life span 1000ms</button>
 
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-action="baldrick_examples"
 	data-template="#modal_content_table_example"
@@ -69,7 +69,7 @@
 
 >Modal Request (Template)</button>
 
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-request="#text-area-src"
 	data-template="#modal_content_table_example"
@@ -81,13 +81,13 @@
 	data-modal-buttons="Close|dismiss;Save|alert|button-primary"
 
 >Modal Request (Template)</button>
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-action="baldrick_examples_json"
 	data-target="#text-area-src"
 
 >Request to textarea</button>
-<textarea style="width:100%;" id="text-area-src" class="wp-ajax" data-event="change" data-modal="textarea" data-modal-title="this data" data-template="#modal_content_table_example">[{"key":"modal","value":"example-modal"},{"key":"modalTitle","value":"Baldrick Modal Example"},{"key":"modalButtons","value":"Close|dismiss;Save|alert|button-primary"},{"key":"modalWidth","value":"500px"},{"key":"modalHeight","value":"500px"},{"key":"action","value":"baldrick_examples"},{"key":"template","value":"#modal_content_table_example"},{"key":"modalCenter","value":"true"}]</textarea>
+<textarea style="width:100%;" id="text-area-src" class="wp-baldrick" data-event="change" data-modal="textarea" data-modal-title="this data" data-template="#modal_content_table_example">[{"key":"modal","value":"example-modal"},{"key":"modalTitle","value":"Baldrick Modal Example"},{"key":"modalButtons","value":"Close|dismiss;Save|alert|button-primary"},{"key":"modalWidth","value":"500px"},{"key":"modalHeight","value":"500px"},{"key":"action","value":"baldrick_examples"},{"key":"template","value":"#modal_content_table_example"},{"key":"modalCenter","value":"true"}]</textarea>
 
 <hr>
 <form id="test_form">
@@ -97,12 +97,12 @@
 <input type="text" name="data[add]" value="data[add]"><br>
 <input type="text" name="data[more]" value="data[more]"><br>
 <input type="text" name="data[fields]" value="data[fields]"><br>
-<button type="button" class="wp-ajax" data-request="#test_form" data-template="#form_template" data-modal="woooter">Send</button>
+<button type="button" class="wp-baldrick" data-request="#test_form" data-template="#form_template" data-modal="woooter">Send</button>
 </form>
 <hr>
 <div id="form_template_resault"></div>
 <script type="text/html" id="modal_content_example">
-<button class="button wp-ajax" type="button" 
+<button class="button wp-baldrick" type="button" 
 	
 	data-action="baldrick_examples"
 	data-modal="example-modal-inner"

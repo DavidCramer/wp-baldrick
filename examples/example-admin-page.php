@@ -13,6 +13,15 @@ function baldrick_build_example_page(){
 
 
 // add example ajax actions
+add_action( 'wp_ajax_search_posts', 'example_post_search');
+add_action( 'wp_ajax_nopriv_search_posts', 'example_post_search');
+function example_post_search(){
+	$_GET['s'] = $_POST['_value'];
+	$posts = get_posts();
+
+	wp_send_json( $posts );
+}
+
 add_action( 'wp_ajax_baldrick_examples', 'baldrick_examples_function' );
 add_action( 'wp_ajax_baldrick_examples_json', 'baldrick_examples_json' );
 // add example ajax function
