@@ -14,6 +14,8 @@ if ( ! defined( 'WPINC' ) ) {
 // Include Framework
 include plugin_dir_path( __FILE__ ) . 'framework.php';
 
+// include frontend example
+include plugin_dir_path( __FILE__ ) . 'examples/example-frontend-shortcode.php';
 
-// include Examples
+// include admin example
 include plugin_dir_path( __FILE__ ) . 'examples/example-admin-page.php';
