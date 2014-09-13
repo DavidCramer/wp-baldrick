@@ -59,6 +59,14 @@ if(!function_exists('baldrick_register_libs')){
 							'pages' => json_url( 'pages' ),
 							'taxonomies' => json_url( 'taxonomies' ),
 						);
+
+						//add Pods endpoint if Pods & Pods JSON URL are active
+						$pods_end_points = baldrick_pods_endpoint();
+						if ( is_array( $pods_end_points ) ) {
+							$endpoints = array_merge( $endpoints, $pods_end_points );
+						}
+
+
 						echo "wp_api_endpoint = " . json_encode( $endpoints ) . ";\r\n";
 					}
 				?>
@@ -72,6 +80,39 @@ if(!function_exists('baldrick_register_libs')){
 			});
 		</script>
 		<?php
+	}
+
+	function baldrick_pods_endpoint() {
+		if ( defined( 'PODS_VERSION' ) && defined( 'PODS_JSON_API_VERSION' ) ) {
+			//add the basic pods endpoints
+			$endpoints[ 'pods' ] = json_url( 'pods' );
+			$endpoints[ 'pods-api' ] = json_url( 'pods-api' );
+
+			//get name of all registered Pods
+			$pods = pods_api()->load_pods( array( 'names' => true ) );
+
+			//add end point foreach if there are registered Pods
+			if ( is_array( $pods ) && ! empty( $pods ) ) {
+				$endpoint_types = array( 'pods', 'pods_api' );
+				foreach( $pods as $pod ) {
+					foreach ( $endpoint_types as $type ) {
+						$endpoints = array_merge( $endpoints, array( "{$type}/{$pod}" => json_url( "{$type}/{$pod}" ) ) );
+					}
+
+				}
+
+			}
+
+
+
+
+			return $endpoints;
+
+		}
+
+
+
+
 	}
 
 	function baldrick_enqueue_libs(){
