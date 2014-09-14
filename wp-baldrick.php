@@ -19,3 +19,7 @@ include plugin_dir_path( __FILE__ ) . 'examples/example-frontend-shortcode.php';
 
 // include admin example
 include plugin_dir_path( __FILE__ ) . 'examples/example-admin-functions.php';
+
+
+// include pods example
+include plugin_dir_path( __FILE__ ) . 'examples/example-pods.php';
